@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>custom web component</title>
+</head>
+<body>
+    <h1>Custom web Component Demo</h1>
+
+    <movie-card name ="Star Wars" detail = "May the force be with you"></movie-card>
+
+    <p>Im not in component</p>
+
+    <style>
+        p{
+            color: #FF0000;
+        }
+    </style>
+
+    <script>
+
+        class DemoWebComponent extends HTMLElement {
+            constructor() {
+                super();
+                let innerHTML = `
+                    <h1>${this.name}<h1>
+                    <p>${this.detail}<p>
+                    <style>
+                        p{
+                            color: #0000FF
+                        }
+                    </style>
+                `;
+                let shadowRoot = this.attachShadow({mode:'open'});
+                shadowRoot.innerHTML = innerHTML;
+            }
+
+            set name(val) {
+                this.setAttribute("name", val);
+            }
+
+            get name() {
+                return this.getAttribute('name');
+            }
+
+            set detail(val) {
+                this.setAttribute("detail", val);
+            }
+
+            get detail() {
+                return this.getAttribute('detail');
+            }
+
+            connectedCallback(){
+                console.log('inserted from DOM');
+            }
+    
+            disconnectedCallback(){
+                console.log('removed from DOM');
+            }
+        }
+        window.customElements.define('movie-card', DemoWebComponent);
+
+       
+    </script>
+
+
+
+
+</body>
+</html>

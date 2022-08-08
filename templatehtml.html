@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tem demo</title>
+    </head>
+    <body>
+        hello
+        <template id="topMovies">
+            <h3>Movie Name</h3>
+            <p> Desc </p>
+        </template>
+
+        <div id="placeholder"></div>
+
+        <script>
+            let movies = [
+                {name:"Star Wars", detail:"Force is with me"},
+                {name:"Star Wards", detail:"Force is with in me"},
+            ];
+
+            let movie = document.querySelector('#topMovies');
+            let pholder = document.querySelector('#placeholder'); 
+
+            for(i in movies) {
+                movie.content.querySelector('h3').innerText = movies[i].name;
+                movie.content.querySelector('p').innerText = movies[i].detail;
+                let cd = document.importNode(movie.content, true);
+                pholder.appendChild(cd);
+            }
+        </script>
+
+
+    </body>
+</html>
